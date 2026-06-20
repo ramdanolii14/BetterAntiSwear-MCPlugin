@@ -1,0 +1,109 @@
+# ==========================================================
+#   BetterAntiSwear — Punishment Configuration
+#
+#   Each key (1, 2, 3, ...) maps to a violation count.
+#   The "default" entry is used when violations exceed max-violations.
+#
+#   Placeholders available everywhere:
+#     {player}   — offending player's name
+#     {word}     — the detected bad word
+#     {count}    — current violation count
+#     {max}      — max-violations value from config.yml
+#     {server}   — server name (from server.properties)
+#
+#   console-commands are executed AS THE CONSOLE.
+#   This makes punishments compatible with ANY plugin:
+#   EssentialsX, LiteBans, AdvancedBan, CMI, etc.
+#   Leave the list empty ([]) if you don't need extra commands.
+# ==========================================================
+
+punishments:
+
+  # ── Violation #1 — Warning ─────────────────────────────
+  "1":
+    description: "First offense — Formal warning"
+    # Message sent privately to the offending player
+    player-message: "&c&l[Anti-Swear] &r&eWarning &c{count}&e/&c{max}&e: Keep the chat clean or face consequences!"
+    # Kick the player? (they can reconnect immediately)
+    kick: false
+    kick-reason: ""
+    # Internal mute: block this player's chat messages for X minutes (0 = disabled)
+    # This does NOT require any external plugin.
+    internal-mute-minutes: 0
+    # Commands run by console after punishment is applied
+    console-commands: []
+    # Broadcast to the whole server?
+    broadcast: false
+    broadcast-message: ""
+
+  # ── Violation #2 — Chat Mute (5 min) ──────────────────
+  "2":
+    description: "Second offense — Muted for 5 minutes"
+    player-message: "&c&l[Anti-Swear] &r&eYou have been &cmuted for 5 minutes&e. (&c{count}&e/&c{max}&e)"
+    kick: false
+    kick-reason: ""
+    # BetterAntiSwear internal mute (no external plugin needed)
+    internal-mute-minutes: 5
+    # Optional: also run an EssentialsX / LiteBans mute command
+    # console-commands:
+    #   - "mute {player} 5m [BAS] Swearing (2nd offense)"
+    console-commands: []
+    broadcast: false
+    broadcast-message: ""
+
+  # ── Violation #3 — Kick ───────────────────────────────
+  "3":
+    description: "Third offense — Kicked from server"
+    player-message: ""
+    kick: true
+    kick-reason: |-
+      &c&lBetterAntiSwear
+      &r
+      &eYou were &ckicked&e for inappropriate language.
+      &7This is offense &c{count}&7/&c{max}&7.
+      &7Further violations will result in a ban.
+    internal-mute-minutes: 0
+    console-commands: []
+    broadcast: true
+    broadcast-message: "&8[&cBAS&8] &c{player} &7was kicked for inappropriate language. &8(&c{count}&8/&c{max}&8)"
+
+  # ── Violation #4 — Temporary Ban (2 hours) ────────────
+  "4":
+    description: "Fourth offense — Temp-banned for 2 hours"
+    player-message: ""
+    kick: false
+    kick-reason: ""
+    internal-mute-minutes: 0
+    # Uses vanilla /ban for offline players; replace with your plugin's command:
+    # LiteBans:   "litebans:tempban {player} 2h [BAS] Swearing — 4th offense"
+    # AdvancedBan:"tempban {player} 120 [BAS] Swearing — 4th offense"
+    # EssentialsX:"tempban {player} 2h [BAS] Swearing — 4th offense"
+    # Vanilla:    "ban {player} [BAS] Swearing 4th offense (remove after 2h manually)"
+    console-commands:
+      - "ban {player} [BetterAntiSwear] Temp-ban: Repeated swearing (offense {count}/{max}). Ban expires in 2 hours. Appeal at your-discord.gg"
+    broadcast: true
+    broadcast-message: "&8[&cBAS&8] &c{player} &7has been &ctemp-banned (2h)&7 for repeated swearing. &8({count}/{max})"
+
+  # ── Violation #5 — Permanent Ban ──────────────────────
+  "5":
+    description: "Fifth offense — Permanently banned"
+    player-message: ""
+    kick: false
+    kick-reason: ""
+    internal-mute-minutes: 0
+    console-commands:
+      - "ban {player} [BetterAntiSwear] Permanently banned for repeated swearing violations (offense {count}/{max}). Appeal at your-discord.gg"
+    broadcast: true
+    broadcast-message: "&8[&cBAS&8] &c{player} &7has been &4&lpermanently banned&r &7for repeated violations."
+
+  # ── Default — used for violations beyond max ──────────
+  default:
+    description: "Beyond max violations — Permanent ban (default fallback)"
+    player-message: ""
+    kick: false
+    kick-reason: ""
+    internal-mute-minutes: 0
+    console-commands:
+      - "ban {player} [BetterAntiSwear] Banned for excessive swearing violations. Appeal at your-discord.gg"
+    broadcast: true
+    broadcast-message: "&8[&cBAS&8] &c{player} &7has been banned (excess violations)."

@@ -1,0 +1,96 @@
+# ==========================================================
+#   BetterAntiSwear — Messages Configuration
+#   Supports standard Minecraft color codes (&a, &c, &l, etc.)
+#
+#   Placeholders:
+#     {player}  — player name
+#     {word}    — detected bad word (masked in some contexts)
+#     {count}   — violation count
+#     {max}     — max violations
+#     {group}   — word group name
+# ==========================================================
+
+# Prefix prepended to plugin messages in console/command output
+prefix: "&8[&c&lBAS&8] "
+
+# ──────────────────────────────────────────────────────────
+# ADMIN NOTIFICATIONS
+# Sent to players with betterantiswear.admin or betterantiswear.notify
+# ──────────────────────────────────────────────────────────
+admin:
+  # Chat message shown to admins when a swear is detected
+  chat-notification: "&8[&cBAS&8] &7{player} &8» &cSwear detected: &f{word} &8| &7Violation &c#{count}&7/&c{max}"
+
+  # Action bar message shown above the hotbar (NOT a title/announcement)
+  actionbar-notification: "&c⚠ &7{player} &cused: &f{word} &8(Offense &c{count}&8/&c{max}&8)"
+
+# ──────────────────────────────────────────────────────────
+# PLAYER MESSAGES
+# ──────────────────────────────────────────────────────────
+player:
+  # Shown when the player's message is censored (word replaced with ***)
+  message-censored: "&8[&cBAS&8] &7Your message contained inappropriate language and was censored."
+  # Shown when the player's message is blocked entirely
+  message-blocked: "&8[&cBAS&8] &cYour message was blocked for containing inappropriate language."
+  # Shown when a muted player tries to chat
+  muted: "&8[&cBAS&8] &cYou are muted for inappropriate language. &7({minutes} minute(s) remaining)"
+
+# ──────────────────────────────────────────────────────────
+# COMMANDS — /bas
+# ──────────────────────────────────────────────────────────
+commands:
+  no-permission: "&8[&cBAS&8] &cYou do not have permission to use this command."
+  player-not-found: "&8[&cBAS&8] &cPlayer &f{player}&c not found."
+  usage-check: "&8[&cBAS&8] &7Usage: &f/bas check <player>"
+  usage-reset: "&8[&cBAS&8] &7Usage: &f/bas reset <player>"
+  usage-addword: "&8[&cBAS&8] &7Usage: &f/bas addword <word> [group]"
+  usage-removeword: "&8[&cBAS&8] &7Usage: &f/bas removeword <word>"
+  unknown-command: "&8[&cBAS&8] &cUnknown sub-command. Use &f/bas help&c for a list."
+  console-only: "&8[&cBAS&8] &cThis command cannot be used from the console."
+
+  reload-success: "&8[&cBAS&8] &aAll configuration files reloaded successfully."
+  reload-fail: "&8[&cBAS&8] &cFailed to reload configuration. Check console for errors."
+
+  check-result: "&8[&cBAS&8] &f{player} &7has &c{count} &7violation(s). &8(resets in {reset_in} min)"
+  check-none: "&8[&cBAS&8] &f{player} &7has &ano &7violations on record."
+
+  reset-success: "&8[&cBAS&8] &aViolations for &f{player} &ahave been reset."
+
+  word-added: "&8[&cBAS&8] &aWord &f'{word}' &aadded to group &f'{group}'&a."
+  word-exists: "&8[&cBAS&8] &eWord &f'{word}' &eis already in the list."
+  word-removed: "&8[&cBAS&8] &aWord &f'{word}' &ahas been removed."
+  word-not-found: "&8[&cBAS&8] &cWord &f'{word}' &cwas not found in any group."
+
+  list-header: "&8&m          &r &6Bad Words — Group: {group} &8&m          "
+  list-entry: "  &7- &f{word}"
+  list-footer: "&8&m                                           "
+  list-empty: "&8[&cBAS&8] &7No words found in group &f'{group}'&7."
+
+  # /bas info output
+  info:
+    - ""
+    - " &c&lBetter Anti Swear &8v{version}"
+    - " &7by &framdanolii &8| &7ramdanolii.my.id"
+    - ""
+    - " &7Status&8: &a{status}"
+    - " &7Bad words loaded&8: &f{word_count}"
+    - " &7Active violations&8: &f{violation_count}"
+    - " &7Optimization (async)&8: &f{async}"
+    - " &7Leet-speak detection&8: &f{leet}"
+    - ""
+
+# ──────────────────────────────────────────────────────────
+# HELP MENU — /bas help
+# ──────────────────────────────────────────────────────────
+help:
+  header: "&8&m                  &r &c&lBetterAntiSwear Help &8&m                  "
+  entries:
+    - " &e/bas reload           &8» &7Reload all config files"
+    - " &e/bas check <player>   &8» &7View a player's violation count"
+    - " &e/bas reset <player>   &8» &7Reset a player's violations"
+    - " &e/bas addword <word> [group] &8» &7Add word to bad words list"
+    - " &e/bas removeword <word>  &8» &7Remove word from bad words list"
+    - " &e/bas list [group]     &8» &7List bad words (group optional)"
+    - " &e/bas info             &8» &7Plugin info & statistics"
+    - " &e/bas help             &8» &7Show this help menu"
+  footer: "&8&m                                                     "

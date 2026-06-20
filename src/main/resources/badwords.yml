@@ -1,0 +1,121 @@
+# ==========================================================
+#   BetterAntiSwear — Bad Words Library
+#   Add, remove, or group words as needed.
+#   Leet-speak normalization is handled automatically.
+# ==========================================================
+
+# ──────────────────────────────────────────────────────────
+# WORD GROUPS
+# Organize words into named groups. Disable a whole group
+# by setting its 'enabled' flag to false.
+# ──────────────────────────────────────────────────────────
+groups:
+
+  general-profanity:
+    enabled: true
+    words:
+      - "fuck"
+      - "shit"
+      - "bitch"
+      - "bastard"
+      - "damn"
+      - "crap"
+      - "piss"
+      - "ass"
+      - "arse"
+      - "cunt"
+      - "twat"
+      - "wanker"
+      - "bollocks"
+      - "tosser"
+      - "prick"
+      - "dick"
+      - "cock"
+      - "pussy"
+      - "whore"
+      - "slut"
+      - "skank"
+      - "retard"
+      - "moron"
+      - "idiot"
+
+  slurs:
+    enabled: true
+    words:
+      - "nigger"
+      - "nigga"
+      - "faggot"
+      - "fag"
+      - "dyke"
+      - "spic"
+      - "kike"
+      - "chink"
+      - "gook"
+      - "wetback"
+      - "cracker"
+      - "honky"
+
+  sexual-content:
+    enabled: true
+    words:
+      - "porn"
+      - "pornography"
+      - "masturbate"
+      - "orgasm"
+      - "blowjob"
+      - "handjob"
+      - "dildo"
+      - "vibrator"
+      - "hentai"
+      - "nsfw"
+
+  violence:
+    enabled: true
+    words:
+      - "kys"
+      - "kill yourself"
+      - "go die"
+      - "slit your wrists"
+      - "hang yourself"
+
+  # Add your own server-specific blocked words here
+  custom:
+    enabled: true
+    words: []
+
+# ──────────────────────────────────────────────────────────
+# WHITELIST
+# Words that are NEVER flagged even if they contain a fragment
+# of a bad word. Useful to prevent false positives.
+# ──────────────────────────────────────────────────────────
+whitelist:
+  - "assassin"
+  - "assassination"
+  - "classic"
+  - "classical"
+  - "bass"
+  - "grass"
+  - "mass"
+  - "pass"
+  - "glass"
+  - "class"
+  - "brass"
+  - "compass"
+  - "bypass"
+  - "crass"
+  - "harass"
+  - "trespass"
+  - "damnation"
+  - "assumption"
+  - "passport"
+
+# ──────────────────────────────────────────────────────────
+# REGEX PATTERNS (Advanced users only)
+# Custom Java regex patterns for complex matching.
+# Only active when detection.cache-regex-patterns is true.
+# ──────────────────────────────────────────────────────────
+regex-patterns:
+  enabled: false
+  patterns:
+    # Example: match any variation of a word with symbols between letters
+    # - "f[^a-z]*u[^a-z]*c[^a-z]*k"

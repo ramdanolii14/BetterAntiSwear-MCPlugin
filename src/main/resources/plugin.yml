@@ -1,0 +1,78 @@
+name: BetterAntiSwear
+version: '${project.version}'
+main: dev.ramdanolii.betterantiswear.BetterAntiSwear
+api-version: '1.20'
+description: Advanced anti-swear plugin with high customization, leet-speak detection, and flexible punishment system. Requires Paper or a Paper fork (Purpur, Pufferfish, etc).
+authors:
+  - ramdanolii
+website: https://ramdanolii.my.id
+
+# ============================================================
+# PERMISSIONS
+# Compatible with: LuckPerms, PermissionsEx, GroupManager,
+#                  PowerRanks, UltraPermissions, bPermissions,
+#                  and any Bukkit/Vault-compatible permission plugin
+# ============================================================
+permissions:
+
+  # ── Bypass ──────────────────────────────────────────────
+  betterantiswear.bypass:
+    description: Bypass swear detection entirely (for admins/trusted players)
+    default: op
+
+  # ── Admin ───────────────────────────────────────────────
+  betterantiswear.admin:
+    description: Receive violation notifications and use all admin commands
+    default: op
+    children:
+      betterantiswear.reload: true
+      betterantiswear.check: true
+      betterantiswear.reset: true
+      betterantiswear.addword: true
+      betterantiswear.removeword: true
+      betterantiswear.listwords: true
+      betterantiswear.info: true
+
+  # ── Individual permissions ───────────────────────────────
+  betterantiswear.reload:
+    description: Reload all configuration files
+    default: op
+
+  betterantiswear.check:
+    description: Check a player's violation count
+    default: op
+
+  betterantiswear.reset:
+    description: Reset a player's violations
+    default: op
+
+  betterantiswear.addword:
+    description: Add a word to the bad words list
+    default: op
+
+  betterantiswear.removeword:
+    description: Remove a word from the bad words list
+    default: op
+
+  betterantiswear.listwords:
+    description: List all bad words or words in a group
+    default: op
+
+  betterantiswear.info:
+    description: View plugin information
+    default: op
+
+  betterantiswear.notify:
+    description: Receive swear detection notifications (without full admin access)
+    default: op
+
+commands:
+  bas:
+    description: BetterAntiSwear main command
+    usage: /bas <reload|check|reset|addword|removeword|list|info|help>
+    permission: betterantiswear.admin
+    permission-message: '&c[BAS] You do not have permission to use this command.'
+    aliases:
+      - betterantiswear
+      - antiswear
+      - bас
