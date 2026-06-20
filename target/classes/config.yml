@@ -1,0 +1,114 @@
+# ==========================================================
+#   BetterAntiSwear — Main Configuration
+#   Plugin by ramdanolii | https://ramdanolii.my.id
+#   Version: 1.0.0
+# ==========================================================
+
+# ──────────────────────────────────────────────────────────
+# OPTIMIZATION
+# Fine-tune performance to match your server's needs.
+# ──────────────────────────────────────────────────────────
+optimization:
+  # Master switch — set to false to disable the plugin without uninstalling
+  enabled: true
+
+  # Process chat events asynchronously (reduces main-thread lag on busy servers)
+  # Recommended: true for servers with 50+ players
+  async-processing: true
+
+  # Cache compiled regex patterns for faster repeated matching
+  cache-regex-patterns: true
+
+  # Maximum number of player records to keep in memory
+  max-cache-size: 500
+
+  # How often (in minutes) to purge expired player data from memory
+  cleanup-interval: 30
+
+# ──────────────────────────────────────────────────────────
+# DETECTION
+# Control how the plugin identifies bad language.
+# ──────────────────────────────────────────────────────────
+detection:
+  # Ignore letter casing during matching (HIGHLY RECOMMENDED)
+  case-insensitive: true
+
+  # Detect leet-speak substitutions: 3→e, @→a, 1→i, 0→o, $→s, 7→t, 4→a
+  leet-speak-detection: true
+
+  # Detect bad words inside longer words (e.g. "assassin" would normally match "ass")
+  # Use the whitelist in badwords.yml to exclude false positives
+  partial-word-matching: true
+
+  # Reduce repeated characters before checking: "fuuuuck" → "fuck"
+  normalize-repeated-chars: true
+
+  # Strip punctuation and special characters before checking
+  strip-special-chars: true
+
+  # Minimum character length of a word before it is checked
+  min-word-length: 3
+
+  # Check words split by spaces when joined (e.g. "f u c k")
+  detect-spaced-words: true
+
+# ──────────────────────────────────────────────────────────
+# NOTIFICATIONS
+# Configure how admins are alerted about violations.
+# ──────────────────────────────────────────────────────────
+notifications:
+  # Notify players with betterantiswear.admin or betterantiswear.notify permission
+  notify-admins: true
+
+  # Send a chat message to admins
+  chat-notification: true
+
+  # Send an action bar notification (above the hotbar, NOT an announcement/title)
+  actionbar-notification: true
+
+  # How long the action bar message stays visible (in ticks; 20 ticks = 1 second)
+  actionbar-duration: 80
+
+  # Print violations to the server console
+  log-to-console: true
+
+  # Write violations to a log file inside the plugin folder
+  log-to-file: true
+  log-file-name: "violations.log"
+
+# ──────────────────────────────────────────────────────────
+# VIOLATION TRACKING
+# ──────────────────────────────────────────────────────────
+violations:
+  # Automatically reset a player's violation count after X minutes of clean behavior
+  # Set to 0 to never auto-reset
+  reset-after-minutes: 60
+
+  # Save violation data to disk so it survives server restarts
+  persist-across-restarts: true
+
+  # After this many violations the "default" punishment in punishments.yml is used
+  max-violations: 5
+
+# ──────────────────────────────────────────────────────────
+# CHAT BEHAVIOR
+# What happens to the message itself when a bad word is detected.
+# ──────────────────────────────────────────────────────────
+chat:
+  # Block the entire message from being sent (true) or just censor the word (false)
+  block-message: false
+
+  # Replace detected words with asterisks in chat (only if block-message is false)
+  censor-in-chat: true
+
+  # Character used when censoring: * # @ etc.
+  censor-character: "*"
+
+  # Tell the offending player their message was censored
+  notify-player-on-censor: true
+
+  # Tell the offending player their message was blocked
+  notify-player-on-block: true
+
+  # Show the player's current violation count in the notification
+  show-violation-count: true
